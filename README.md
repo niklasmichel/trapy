@@ -1,7 +1,7 @@
-# TRApy - The Tape Response Assay Python Module for somatosensory research
+# TRApy - The Tape Response Assay Python Package for somatosensory research
 by Niklas Michel, niklas.michel@gmail.com, https://www.linkedin.com/in/niklas-michel/
 ## Repository content
-Python code to use time record txt-files produced with the Android app 
+Python3 package to use time record txt-files produced with the Android app 
 "Counter and Timer" by risinier 
 (https://play.google.com/store/apps/details?id=com.risinier.counterandtimer)
 to extract certain metrics, such as 
@@ -18,6 +18,14 @@ setup.py
 trapy/__init__.py
 trapy/trapy.py
 trapy/filehandler.py
+tests/test.py
+tests/TapeResponsAssay.xlsx
+tests/all_trials_metrics.csv
+tests/group_1_metrics.csv
+tests/group_1_time_courses.csv
+tests/group_2_metrics.csv
+tests/group_2_time_courses.csv
+
 ``` 
 ## Information
 This improved tape response assay can quantify sensory-driven behaviour 
@@ -60,3 +68,6 @@ Future updates will add
  - docs/conf.py
  - error handling, e.g. for file naming issues
  - statistics or graphing functionality, if requested
+
+\
+Feel free to contact me about this package or the assay, see email at the top.
