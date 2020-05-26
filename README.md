@@ -9,11 +9,12 @@ to extract certain metrics, such as
  - area under the event-time-curve
  - no-event-time
  
- and produce a neat xlsx or csv file for subsequent statistical analysis.
+ and produce a neat xlsx or csv files for subsequent statistical analysis.
  ## Repository structure
  ```
 README.md
 LICENSE.txt
+setup.py
 trapy/__init__.py
 trapy/trapy.py
 trapy/filehandler.py
@@ -55,10 +56,7 @@ trapy.analyze_trials_csv(folder)
 Future updates will add 
  - background concerning the assay in research
  - methodological details
- - setup.py
  - requirements.txt
  - docs/conf.py
- - tests/test.py
- - sampledata/
  - error handling, e.g. for file naming issues
  - statistics or graphing functionality, if requested

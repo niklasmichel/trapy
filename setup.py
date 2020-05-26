@@ -11,7 +11,7 @@ setuptools.setup(
     description="The Tape Response Assay Python Package for Somatosensory Research",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/",
+    url="https://github.com/niklasmichel/trapy",
     packages=setuptools.find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     classifiers=[
         "Programming Language :: Python :: 3",
