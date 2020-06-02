@@ -46,8 +46,11 @@ dd = day, e.g. "01"\
 aa = animal number, e.g. "01"\
 *g = group name, e.g. "WT", "treated" or "C57_injected_4_weeks"\
 \
-Then, after installing this module locally,
-use the following code to analyze all trials and create an excel file
+Install the trapy package running the following in your terminal:
+```
+pip install git+https://github.com/niklasmichel/trapy
+```
+Then, use the following code to analyze all trials and create an excel file
 for subsequent statistical analysis:
 ```python
 import trapy
