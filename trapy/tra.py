@@ -26,12 +26,24 @@ def txt_file_path_list(folder):
     return txt_files
 
 class TRA:
+    """Tape Response Assay class. Specify path to txt files when initiating.
+    Attributes:
+        .folder     - specified path
+        .trials     - list of trial objects
+        .groups     - set of experimental groups
+        .dates      - set of dates of trials
+        .mice       - set of mouse numbers
+    Methods:
+        .to_excel() - writes metrics and time courses to
+                      'TapeResponseAssay.xlsx'
+    """
+
     def __init__(self, folder='/'):
         self.folder = folder
         self.trials = instantiate(self.folder)
-        self.groups = list(set(trial.group for trial in self.trials))
-        self.dates = list(set(trial.date for trial in self.trials))
-        self.mice = list(set(trial.mouse for trial in self.trials))
+        self.groups = set(trial.group for trial in self.trials)
+        self.dates = set(trial.date for trial in self.trials)
+        self.mice = set(trial.mouse for trial in self.trials)
 
 
 
