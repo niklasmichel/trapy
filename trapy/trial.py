@@ -146,5 +146,7 @@ def bout_time_curve(boutlist):
                 counter += 1
             if counter > total_bouts(boutlist):
                 counter = np.nan
+        if i == 300:
+            counter = total_bouts(boutlist)
         timecourse.append(counter)
     return timecourse
