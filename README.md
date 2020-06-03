@@ -9,23 +9,17 @@ to extract certain metrics, such as
  - area under the event-time-curve
  - no-event-time
  
- and produce a neat xlsx or csv files for subsequent statistical analysis.
+ and produce a neat .xlsx file for subsequent statistical analysis.
  ## Repository structure
  ```
 README.md
 LICENSE.txt
 setup.py
 trapy/__init__.py
-trapy/trapy.py
-trapy/filehandler.py
+trapy/tra.py
+trapy/trial.py
 tests/test.py
-tests/TapeResponsAssay.xlsx
-tests/all_trials_metrics.csv
-tests/group_1_metrics.csv
-tests/group_1_time_courses.csv
-tests/group_2_metrics.csv
-tests/group_2_time_courses.csv
-
+tests/test_data/TapeResponsAssay.xlsx
 ``` 
 ## Information
 This improved tape response assay can quantify sensory-driven behaviour 
@@ -53,15 +47,10 @@ pip install git+https://github.com/niklasmichel/trapy
 Then, use the following code to analyze all trials and create an excel file
 for subsequent statistical analysis:
 ```python
-import trapy
+from trapy import TRA
 
-trapy.analyze_trials(folder, outputfile='TapeResponseAssay.xlsx')
-```
-Or, for creating csv files, use:
-```python
-import trapy
-
-trapy.analyze_trials_csv(folder)
+experiment = TRA(folder)
+experiment.to_excel()
 ```
 
 Future updates will add 
