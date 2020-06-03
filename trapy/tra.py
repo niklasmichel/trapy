@@ -38,8 +38,8 @@ class TRA:
     def to_excel(self):
         """Crawls folder for txt files; instantiates them as Trial() objects,
         thereby analyzing various tape assay metrics;
-        prints these metrics to an excel-file, specified with outputfile='TapeResponseAssay.xlsx'.
-        Creates worksheets for all metrics, metrics per group and timecourse per group, respectively.
+        prints these metrics to 'TapeResponseAssay.xlsx'.
+        Creates worksheets for all metrics and timecourse per group, respectively.
         """
         sys.stdout.write('Analyzing txt files in given folder...\n')
         # trials = instantiate(folder)
