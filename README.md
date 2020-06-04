@@ -1,7 +1,7 @@
-# TRApy - The Tape Response Assay Python Package for somatosensory research
+# TRApy - The Tape Response Assay Python Module for Somatosensory Research
 by Niklas Michel, niklas.michel@gmail.com, https://www.linkedin.com/in/niklas-michel/
 ## Repository content
-Python3 package to use time record txt-files produced with the Android app 
+Python3 module to use time record txt-files produced with the Android app 
 "Counter and Timer" by risinier 
 (https://play.google.com/store/apps/details?id=com.risinier.counterandtimer)
 to extract certain metrics, such as 
@@ -40,17 +40,26 @@ dd = day, e.g. "01"\
 aa = animal number, e.g. "01"\
 *g = group name, e.g. "WT", "treated" or "C57_injected_4_weeks"\
 \
-Install the trapy package running the following in your terminal:
+Install the trapy module by running the following in your terminal:
 ```
 pip install git+https://github.com/niklasmichel/trapy
 ```
-Then, use the following code to analyze all trials and create an excel file
-for subsequent statistical analysis:
+Then, use the following code to analyze all trials, inspect the data and results
+and create an excel file for subsequent statistical analysis:
 ```python
 from trapy import TRA
 
 experiment = TRA(folder)
+# Calculated Metrics from txt files in /home/niklas/PycharmProjects/trapy/tests/test_data
+print(experiment.data)
+# prints dictionary with group : DataFrame of bout-time-data
+print(experiment.metrics)
+# prints DataFrame with relevant metrics per trial
 experiment.to_excel()
+# Writing sheet "All Trials Metrics" to excel file.
+# Writing sheet for time courses of group "group_1" to excel file.
+# Writing sheet for time courses of group "group_2" to excel file.
+# All done; see /home/niklas/PycharmProjects/trapy/tests/test_data/TapeResponseAssay.xlsx
 ```
 
 Future updates will add 
