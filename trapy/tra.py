@@ -1,6 +1,8 @@
 import os
 import sys
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 from .trial import Trial
 
 
@@ -43,19 +45,73 @@ class TRA:
     def __init__(self, folder='/'):
         self.folder = folder
         self.trials = instantiate(self.folder)
-        self.groups = set(trial.group for trial in self.trials)
+        self.groups = set(sorted(set(trial.group for trial in self.trials)))
         self.dates = set(trial.date for trial in self.trials)
         self.mice = set(trial.mouse for trial in self.trials)
         self.metrics = trials_to_df(self.trials)
         self.data = timecourses_to_dfs(self)
 
 
-    def plot_data(self):
-        # plt array of 2x(nr of groups) subfigures:
+    def plot_data(self, seconds=300):
+        """Returns an array of plots of bout-time data and saves it in TRA.folder as png file."""
+        # plt array of subfigures in 2 columns and (nr of groups + 1) rows:
         # - left: single bout-time-curves per group
-        # - right: group average +- SD or SEM, maybe specify as argument/param
-        # - bottom row: left all trials, right all group averages
-        pass
+        # - right: group average ± SD
+        # - bottom row:
+        #   - left: all group averages ± SD
+        #   - right: all group averages ± SEM
+        nrows = len(self.groups) + 1
+        ncols = 2
+        errorevery = int(np.log10(seconds))
+        time = seconds + 1
+        fig, axes = plt.subplots(nrows, ncols, figsize=(15, (nrows * 5)))
+        fig.subplots_adjust(hspace=0.3)
+        fig.suptitle('Bout-time-curves of trials and groups', fontsize=15)
+        x = range(time)
+
+        for ax, group in zip(axes.flatten()[:-2:2], self.groups):
+            mice = [trial.mouse for trial in self.trials if trial.group == group]
+            for mouse in mice:
+                y = self.data[group][mouse][:time]
+                ax.plot(x, y)
+            ax.legend(mice, loc='upper left');
+            ax.set(title=f'Time courses per mouse in {group}',
+                   xlabel='Trial time (s)',
+                   ylabel='Cumulative bouts');
+
+        for ax, group in zip(axes.flatten()[1:-2:2], self.groups):
+            y = self.data[group]['Mean'][:time]
+            yerr = self.data[group]['SD(n-1)'][:time]
+            ax.errorbar(x, y,
+                        yerr=yerr,
+                        errorevery=errorevery)
+            ax.legend((group,), loc='upper left');
+            ax.set(title='Averaged time course curve ± SD',
+                   xlabel='Trial time (s)',
+                   ylabel='Cumulative bouts');
+
+        for group in self.groups:
+            y = self.data[group]['Mean'][:time]
+            yerr = self.data[group]['SD(n-1)'][:time]
+            axes.flatten()[-2].errorbar(x, y,
+                                        yerr=yerr,
+                                        errorevery=errorevery)
+            axes.flatten()[-2].legend(self.groups, loc='upper left');
+            axes.flatten()[-2].set(title='Averaged time course curves ± SD',
+                                   xlabel='Trial time (s)',
+                                   ylabel='Cumulative bouts');
+            yerr2 = self.data[group]['SD(n-1)'][:time] / np.sqrt(self.data[group]['n'][:time])
+            axes.flatten()[-1].errorbar(x, y,
+                                        yerr=yerr2,
+                                        errorevery=errorevery)
+            axes.flatten()[-1].legend(self.groups, loc='upper left');
+            axes.flatten()[-1].set(title='Averaged time course curves ± SEM',
+                                   xlabel='Trial time (s)',
+                                   ylabel='Cumulative bouts');
+        figname = f'time_courses_t{seconds}.png'
+        fig.savefig(self.folder + '/' + figname)
+        print(f'Saved {figname} to {self.folder}')
+        return fig
 
     def plot_results(self):
         # plt array of (bar graphs?)

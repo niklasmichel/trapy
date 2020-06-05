@@ -51,10 +51,19 @@ from trapy import TRA
 
 experiment = TRA(folder)
 # Calculated Metrics from txt files in /home/niklas/PycharmProjects/trapy/tests/test_data
+
 print(experiment.data)
-# prints dictionary with group : DataFrame of bout-time-data
+## prints dictionary with group : DataFrame of bout-time-data
+
 print(experiment.metrics)
-# prints DataFrame with relevant metrics per trial
+## prints DataFrame with relevant metrics per trial
+
+experiment.plot_data()
+# Saved time_courses_t300.png to /home/niklas/PycharmProjects/trapy/tests/test_data
+
+experiment.plot_data(seconds=100)
+# Saved time_courses_t100.png to /home/niklas/PycharmProjects/trapy/tests/test_data
+
 experiment.to_excel()
 # Writing sheet "All Trials Metrics" to excel file.
 # Writing sheet for time courses of group "group_1" to excel file.
@@ -62,13 +71,14 @@ experiment.to_excel()
 # All done; see /home/niklas/PycharmProjects/trapy/tests/test_data/TapeResponseAssay.xlsx
 ```
 
-Future updates will add 
+Future updates will add
+ - TRA.plot_results(); shall create plots of relevant metrics 
  - background concerning the assay in research
  - methodological details
  - requirements.txt
  - docs/conf.py
  - error handling, e.g. for file naming issues
- - statistics or graphing functionality, if requested
+ - statistics functionality, if requested
 
 \
 Feel free to contact me about this package or the assay, see email at the top.

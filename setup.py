@@ -5,7 +5,7 @@ with open("README.md", "r") as readme:
 
 setuptools.setup(
     name="trapy", # Replace with your own username
-    version="0.2.2",
+    version="0.3.0",
     author="Niklas Michel",
     author_email="niklas.michel@gmail.com",
     description="The Tape Response Assay Python Package for Somatosensory Research",
