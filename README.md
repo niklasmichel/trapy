@@ -71,6 +71,8 @@ experiment.to_excel()
 # All done; see /home/niklas/PycharmProjects/trapy/tests/test_data/TapeResponseAssay.xlsx
 ```
 
+![Bout-time plots created with trapy](https://github.com/niklasmichel/trapy/blob/master/tests/test_data/time_courses_t300.png)
+
 Future updates will add
  - TRA.plot_results(); shall create plots of relevant metrics 
  - background concerning the assay in research
