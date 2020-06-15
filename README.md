@@ -9,7 +9,7 @@ to extract certain metrics, such as
  - area under the event-time-curve
  - no-event-time
  
- and produce a neat .xlsx file for subsequent statistical analysis.
+ and produce figures and a neat .xlsx file for subsequent statistical analysis.
  ## Repository structure
  ```
 README.md
@@ -18,11 +18,14 @@ setup.py
 trapy/__init__.py
 trapy/tra.py
 trapy/trial.py
-tests/test.py
-tests/test_data/TapeResponsAssay.xlsx
+tests/demo.py
+tests/demo_data/TapeResponsAssay.xlsx
+tests/demo_data/time_course_t100.png
+tests/demo_data/time_course_t300.png
+tests/demo_data/results.png
 ``` 
 ## Information
-This improved tape response assay can quantify sensory-driven behaviour 
+This improved tape response assay can quantify sensory-driven behaviour sensitively 
 when researching hairy skin mechanosensation in rodents.\
 \
 Perform the assay and use the free Android app 
@@ -50,7 +53,7 @@ and create an excel file for subsequent statistical analysis:
 from trapy import TRA
 
 experiment = TRA(folder)
-# Calculated Metrics from txt files in /home/niklas/PycharmProjects/trapy/tests/test_data
+# Calculated Metrics from txt files in /trapy/tests/demo_data
 
 print(experiment.data)
 ## prints dictionary with group : DataFrame of bout-time-data
@@ -59,19 +62,30 @@ print(experiment.metrics)
 ## prints DataFrame with relevant metrics per trial
 
 experiment.plot_data()
-# Saved time_courses_t300.png to /home/niklas/PycharmProjects/trapy/tests/test_data
+# Saved time_courses_t300.png to /trapy/tests/demo_data
 
 experiment.plot_data(seconds=100)
-# Saved time_courses_t100.png to /home/niklas/PycharmProjects/trapy/tests/test_data
+# Saved time_courses_t100.png to /trapy/tests/demo_data
+
+experiment.plot_results()
+# AUC Group 1: n = 10, 14751.123214285715 ± 316.33616666025017 (SD)
+# AUC Group 2: n = 9, 11700.694444444445 ± 580.1222640701194 (SD)
+# AUC Group 3: n = 10, 11214.319246031746 ± 204.69887557751363 (SD)
+# AUC Group 4: n = 10, 10186.444444444445 ± 409.2312525401201 (SD)
+# Saved results.png to /trapy/tests/demo_data
+## see figure below
 
 experiment.to_excel()
 # Writing sheet "All Trials Metrics" to excel file.
-# Writing sheet for time courses of group "group_1" to excel file.
-# Writing sheet for time courses of group "group_2" to excel file.
-# All done; see /home/niklas/PycharmProjects/trapy/tests/test_data/TapeResponseAssay.xlsx
+# Writing sheet for time courses of group "Group 1" to excel file.
+# Writing sheet for time courses of group "Group 2" to excel file.
+# Writing sheet for time courses of group "Group 3" to excel file.
+# Writing sheet for time courses of group "Group 4" to excel file.
+# All done; see /trapy/tests/demo_data/TapeResponseAssay.xlsx
+
 ```
 
-![Bout-time plots created with trapy](https://github.com/niklasmichel/trapy/blob/master/tests/test_data/time_courses_t300.png)
+![Bout-time plots created with trapy](https://github.com/niklasmichel/trapy/blob/master/tests/demo_data/results.png)
 
 Future updates will add
  - TRA.plot_results(); shall create plots of relevant metrics 

@@ -23,6 +23,7 @@ class Trial:
         self.tibi = tape_induced_behaviour_index(self.boutlist)
         self.timecourse300 = bout_time_curve_300(self.boutlist)
         self.timecourse = bout_time_curve(self.boutlist)
+        self.auctimecourse300 = auc_time_curve300(self.timecourse300)
 
 
 def create_boutlist(path_to_file):
@@ -150,3 +151,10 @@ def bout_time_curve(boutlist):
             counter = total_bouts(boutlist)
         timecourse.append(counter)
     return timecourse
+
+def auc_time_curve300(timecourse300):
+    l = []
+    for i in range(1,len(timecourse300), 1):
+        ys = [timecourse300[i-1], timecourse300[i]]
+        l.append(0.5 * np.sum(ys))  # trapezoidal rule
+    return l
