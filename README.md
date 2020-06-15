@@ -87,14 +87,15 @@ experiment.to_excel()
 
 ![Bout-time plots created with trapy](https://github.com/niklasmichel/trapy/blob/master/tests/demo_data/results.png)
 
-Future updates will add
- - TRA.plot_results(); shall create plots of relevant metrics 
- - background concerning the assay in research
- - methodological details
- - requirements.txt
- - docs/conf.py
- - error handling, e.g. for file naming issues
- - statistics functionality, if requested
+Future updates will
+ - reduce DRYness in TRA.plot_results()
+ - add group-based results to excel output 
+ - add background concerning the assay in research
+ - add methodological details
+ - add requirements.txt
+ - add docs/conf.py
+ - include error handling, e.g. for file naming issues
+ - add statistics functionality, if requested
 
 \
 Feel free to contact me about this package or the assay, see email at the top.
